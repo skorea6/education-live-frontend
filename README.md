@@ -10,6 +10,11 @@ Html/Javascript를 이용한 교육 플랫폼의 프론트앤드
 * 방송 비밀번호 설정, 입장시 비밀번호 입력
 * 질문하기 기능
 
+# 연관 Github 바로가기
+* 프론트앤드 : https://github.com/skorea6/educationlive_frontend
+* 백엔드: https://github.com/skorea6/educationlive
+* 채팅서버: https://github.com/skorea6/educationlive_chat
+
 
 # 프론트앤드 사진
 <img width="1440" alt="스크린샷 2022-08-17 오후 11 18 15" src="https://user-images.githubusercontent.com/13993684/185158052-4417a522-8a50-405d-a635-f4ee01d44d66.png">
