@@ -10,7 +10,8 @@ var broadcastService = function() {
                 data: JSON.stringify({
                     'title': $('#broadcast_add_title').val(),
                     'detail': $('#broadcast_add_detail').val(),
-                    'keyword': $('#broadcast_add_keyword').val()
+                    'keyword': $('#broadcast_add_keyword').val(),
+                    'password': $('#broadcast_add_password').val()
                 }),
                 success: function (data) {
                     if (data.status_code == 200) {

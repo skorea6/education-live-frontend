@@ -56,37 +56,66 @@ $template = "./template/";
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script>
-    $(document).ready(function (){
-        $.ajax({
-            url: api_url + '/api/broadcast/list',
-            method: 'GET',
-            success: function (data) {
-                if (data.status_code == 200) {
-                    var result = data.data;
-                    var html = '';
+    var mainService = function() {
 
-                    for (var i = 0; i < result.length; i++) {
-                        html += '<div class="col-lg-4">';
-                        html += '<div class="card card-primary card-outline">';
-                        html += '<div class="card-header">';
-                        html += '<h5 class="card-title m-0">' + result[i].title + '</h5>';
-                        html += '</div>';
-                        html += '<div class="card-body">';
-                        html += '    <p class="card-text">호스트: ' + result[i].member_id + ' (' + result[i].nick + ')</p>';
-                        html += '    <p class="card-text">방송 키워드: ' + result[i].keyword + '</p>';
-                        html += '    <a href="/educationlive/live/?code=' + result[i].stream_code + '" class="btn btn-primary">생방송 시청하기</a>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
+        var now_stream_code = null;
+
+        function _init() {
+            $.ajax({
+                url: api_url + '/api/broadcast/list',
+                method: 'GET',
+                success: function (data) {
+                    if (data.status_code == 200) {
+                        var result = data.data;
+                        var html = '';
+
+                        for (var i = 0; i < result.length; i++) {
+                            html += '<div class="col-lg-4">';
+                            html += '<div class="card card-primary card-outline">';
+                            html += '<div class="card-header">';
+                            html += '<h5 class="card-title m-0">' + result[i].title + '</h5>';
+                            html += '</div>';
+                            html += '<div class="card-body">';
+                            html += '    <p class="card-text">호스트: ' + result[i].member_id + ' (' + result[i].nick + ')</p>';
+                            html += '    <p class="card-text">방송 키워드: ' + result[i].keyword + '</p>';
+                            if(result[i].require_password == true){
+                                var onclick_html = "'" + result[i].stream_code + "'"
+                                html += '    <p class="card-text">* 비밀번호가 포함된 방송입니다 *</p>';
+                                html += '    <a href="#" onclick="mainService.openPasswordModal(' + onclick_html + ')" class="btn btn-primary">생방송 시청하기</a>';
+                            }else{
+                                html += '    <a href="/educationlive/live/?code=' + result[i].stream_code + '" class="btn btn-primary">생방송 시청하기</a>';
+                            }
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+
+                        $('#live_list').html(html);
                     }
-
-                    $('#live_list').html(html);
                 }
-            }
-        });
+            });
 
+            $("#button_broadcast_password").click(function () {
+                location.href = '/educationlive/live/?code=' + now_stream_code + '&pass=' + $('#broadcast_password_password').val();
+            });
+        }
+
+        function _openPasswordModal(stream_code){
+            now_stream_code = stream_code;
+            $('#passwordBroadcastModal').modal('show');
+        }
+
+        return {
+            init: _init,
+            openPasswordModal: _openPasswordModal
+        }
+
+    }();
+
+    $(document).ready(function (){
        accountService.init();
        broadcastService.init();
+       mainService.init();
     });
 </script>
 </body>

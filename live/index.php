@@ -98,7 +98,7 @@ $template = "../template/";
     $(document).ready(function (){
 
         $.ajax({
-            url: api_url + '/api/broadcast/detail/' + getParameters('code'),
+            url: api_url + '/api/broadcast/detail/' + getParameters('code') + '/' + getParameters('pass'),
             method: 'GET',
             success: function (data) {
                 if (data.status_code == 200) {
@@ -209,12 +209,12 @@ $template = "../template/";
                     });
 
                 } else {
-                    alert('일치하는 방송이 없습니다!');
+                    alert('비밀번호가 일치하지 않거나 일치하는 방송이 없습니다!');
                     location.href = root_path + '/';
                 }
             },
             error: function (data){
-                alert('일치하는 방송이 없습니다!');
+                alert('비밀번호가 일치하지 않거나 일치하는 방송이 없습니다!');
                 location.href = root_path + '/';
             }
         });

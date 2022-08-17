@@ -97,6 +97,10 @@
                     <label>방송 키워드 (#과 콤마 이용가능)</label>
                     <input type="text" class="form-control" id="broadcast_add_keyword" placeholder="방송 키워드 입력">
                 </div>
+                <div class="form-group">
+                    <label>방송 비밀번호 (미입력시 아무나 접속 가능)</label>
+                    <input type="text" class="form-control" id="broadcast_add_password" placeholder="방송 비밀번호 입력">
+                </div>
                 <hr>
                 <div>
                     <h5>[안내] OBS, Xsplit 등에서 방송 가능합니다.</h5>
@@ -129,6 +133,32 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="button_broadcast_delete">방송 종료하기</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="passwordBroadcastModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">비밀번호가 필요한 방송</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>방송 비밀번호</label>
+                    <input type="text" class="form-control" id="broadcast_password_password" placeholder="방송 비밀번호 입력">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="button_broadcast_password">방송 입장하기</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
 
